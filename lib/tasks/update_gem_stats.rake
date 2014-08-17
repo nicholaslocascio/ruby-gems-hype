@@ -12,8 +12,7 @@ namespace :db do
 
     # Set up partition
     number_of_repos = Repo.count
-    partition_size = (number_of_repos/19).to_i
-    partition_size = 400
+    partition_size = (number_of_repos/20).to_i
     partition_offset = args[:partition].to_i*partition_size
 
     # Get all repos in partition
