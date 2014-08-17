@@ -5,7 +5,6 @@ namespace :db do
   task :create_ruby_repos => :environment do
     CSV.foreach(File.join(Rails.root, "data", "ruby_repos.csv"), headers:true, header_converters: :symbol, converters: :all) do |repo|
       repo_name = repo[:repository_name].to_s
-      puts repo_name
       if Repo.exists?(:name => repo_name)
         next
       end
