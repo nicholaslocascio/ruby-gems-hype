@@ -1,0 +1,37 @@
+<%= form_for(@repo) do |f| %>
+  <% if @repo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@repo.errors.count, "error") %> prohibited this repo from being saved:</h2>
+
+      <ul>
+      <% @repo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :full_name %><br>
+    <%= f.text_field :full_name %>
+  </div>
+  <div class="field">
+    <%= f.label :stargazers_count %><br>
+    <%= f.number_field :stargazers_count %>
+  </div>
+  <div class="field">
+    <%= f.label :referenced_count %><br>
+    <%= f.number_field :referenced_count %>
+  </div>
+  <div class="field">
+    <%= f.label :references_count %><br>
+    <%= f.number_field :references_count %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
