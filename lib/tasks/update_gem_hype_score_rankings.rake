@@ -8,7 +8,7 @@ namespace :db do
 
     (0..number_of_batches).each do |batch_index|
       offset = batch_index*batch_size
-      Repo.order(:hype_score).limit(batch_size).offset(offset).each do |repo|
+      Repo.containing_hype_score.order(:hype_score => :desc).limit(batch_size).offset(offset).each do |repo|
         repo.hype_rank = rank
         repo.save!
         rank += 1
