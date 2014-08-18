@@ -7,8 +7,8 @@ namespace :db do
         next
       end
       hype_ratio = (repo.stargazers_count.to_f / repo.referenced_count.to_f)
-      repo.hype_score = sigmoid(hype_ratio)
-      puts repo.hype_score
+      repo.hype_score = 100.0*sigmoid(hype_ratio)
+      puts repo.name + ", hype_score: " repo.hype_score 
       repo.save!
     end
   end
@@ -16,5 +16,5 @@ end
 
 
 def sigmoid(x)
-  return 1.0/(1+Math.exp(-x))
+  return 1.0/(1.0+Math.exp(-1.0*x))
 end
