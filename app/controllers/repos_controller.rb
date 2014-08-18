@@ -4,7 +4,7 @@ class ReposController < ApplicationController
   # GET /repos
   # GET /repos.json
   def index
-    @repos = Repo.order("hype_score DESC").limit(300).all
+    @repos = Repo.order(:hype_score).limit(400)
   end
 
   # GET /repos/1
