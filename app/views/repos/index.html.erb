@@ -19,7 +19,7 @@
         <td><%= repo.full_name %></td>
         <td><%= repo.stargazers_count %></td>
         <td><%= repo.referenced_count %></td>
-        <td><%= repo.hype_score.to_i.to_s %></td>
+        <td><%= repo.hype_score.to_f.to_s %></td>
         <td><%= link_to 'Show', repo %></td>
         <td><%= link_to 'Edit', edit_repo_path(repo) %></td>
         <td><%= link_to 'Destroy', repo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
