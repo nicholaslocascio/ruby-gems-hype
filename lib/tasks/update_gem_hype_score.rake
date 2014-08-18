@@ -16,5 +16,5 @@ end
 
 
 def sigmoid(x)
-  return 1.0/(1.0+Math.exp(-1.0*x))
+  return 1.0/(1.0+Math.exp(-1.0*x*.01))
 end
