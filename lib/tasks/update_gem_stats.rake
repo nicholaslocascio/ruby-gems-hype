@@ -13,6 +13,7 @@ namespace :db do
     # Set up partition
     number_of_repos = Repo.count
     partition_size = (number_of_repos/20).to_i
+    partition_size = 80
     partition_offset = args[:partition].to_i*partition_size
 
     # Get all repos in partition
@@ -32,7 +33,7 @@ namespace :db do
 
       repo.stargazers_count = remote_repo_data["stargazers_count"]
       repo.watchers_count = remote_repo_data["watchers_count"]
-      repo.description = remote_repo_data["repo_description"]
+      repo.description = remote_repo_data["description"]
       repo.save!
 
       # Get Gemfile of repo
@@ -53,6 +54,7 @@ namespace :db do
 
       dependencies = @referenced_gems_data.dependencies
       repo.references_count = dependencies.count
+      repo.save!
       dependencies.each do |gem_data|
         gem_data = gem_data[0]
         referenced_gem_name = gem_data.name
