@@ -5,15 +5,14 @@ namespace :db do
 
     # Set up client
     Octokit.configure do |c|
-      c.client_id = ENV['GH_BASIC_CLIENT_ID']
-      c.client_secret = ENV['GH_BASIC_SECRET_ID']
+      c.client_id = ENV['GH_BASIC_CLIENT_ID_' + args[:partition] ]
+      c.client_secret = ENV['GH_BASIC_SECRET_ID_' + args[:partition] ]
     end
     client = Octokit::Client.new(per_page: 100)
 
     # Set up partition
     number_of_repos = Repo.count
     partition_size = (number_of_repos/20).to_i
-    partition_size = 80
     partition_offset = args[:partition].to_i*partition_size
 
     # Get all repos in partition
@@ -34,6 +33,8 @@ namespace :db do
       repo.stargazers_count = remote_repo_data["stargazers_count"]
       repo.watchers_count = remote_repo_data["watchers_count"]
       repo.description = remote_repo_data["description"]
+      repo.repo_created_at = remote_repo_data["created_at"]
+      repo.forks_count = remote_repo_data["forks_count"]
       repo.save!
 
       # Get Gemfile of repo
@@ -59,10 +60,7 @@ namespace :db do
         gem_data = gem_data[0]
         referenced_gem_name = gem_data.name
 
-        @referenced_repo = Repo.find_by(:name => referenced_gem_name)
-        if @referenced_repo.nil?
-          next
-        end
+        @referenced_repo = Repo.find_or_create_by(:name => referenced_gem_name)
 
         if @referenced_repo.referenced_count.nil?
           @referenced_repo.referenced_count = 0
