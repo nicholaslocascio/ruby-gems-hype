@@ -4,7 +4,6 @@ namespace :db do
   desc "Update Repo Download Count"
   task :update_repo_download_count,  [:partition] => :environment do |t, args|
 
-
     # Set up partition
     number_of_repos = Repo.count
     partition_size = (number_of_repos/20).to_i
