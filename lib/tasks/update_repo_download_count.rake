@@ -1,5 +1,4 @@
 require 'gems'
-require 'pp'
 
 namespace :db do
   desc "Update Repo Download Count"
@@ -17,7 +16,7 @@ namespace :db do
     repos_to_process.each do |repo|
       # Return some basic information about rails
       info = Gems.info repo.name
-      pp info
+      Rails.logger.info info
       if info and info["downloads"]
         repo.download_count = info["downloads"]
       end
