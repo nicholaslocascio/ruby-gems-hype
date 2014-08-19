@@ -7,6 +7,7 @@ namespace :db do
       repo.hype_score = 0
       repo.references_count = 0
       repo.referenced_count = 0
+      repo.save!
     end
   end
 end
