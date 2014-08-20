@@ -89,9 +89,8 @@ end
 
 
 def z_score(x,sigma,mean)
-  x_scaled = log_scale(x)
-  score = (x_scaled-mean)/sigma
-  return score
+  score = (x-mean)/sigma
+  return log_scale(score)
 end
 
 def log_scale(x)
