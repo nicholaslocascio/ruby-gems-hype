@@ -75,11 +75,11 @@ namespace :db do
       puts "ref: " + reference_ratio_z_normalize.to_s +  " down: " + download_ratio_z_normalize.to_s
       puts "sigma:" + referenced_sigma.to_s
 
-      if download_ratio_z_normalize.equal?(nan)
+      if !download_ratio_z_normalize
         download_ratio_z_normalize = 0
       end
 
-      if reference_ratio_z_normalize.equal?(nan)
+      if !reference_ratio_z_normalize
         reference_ratio_z_normalize = 0
       end
 
