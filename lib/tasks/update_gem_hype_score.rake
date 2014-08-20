@@ -75,6 +75,14 @@ namespace :db do
       puts "ref: " + reference_ratio_z_normalize.to_s +  " down: " + download_ratio_z_normalize.to_s
       puts "sigma:" + referenced_sigma.to_s
 
+      if download_ratio_z_normalize.nan?
+        download_ratio_z_normalize = 0
+      end
+
+      if reference_ratio_z_normalize.nan?
+        reference_ratio_z_normalize = 0
+      end
+
       repo.hype_score = 200*[reference_ratio_z_normalize,download_ratio_z_normalize].max - 100
       puts "Repo: " + repo.name +  "hype score:" + repo.hype_score.to_s
       repo.save!
