@@ -60,16 +60,17 @@ namespace :db do
         next
       end
 
-
+      puts reference_ratio
+      threshold = 0.000001
 
       reference_ratio_z_normalize = 0
-      if reference_ratio and reference_ratio != 0
+      if reference_ratio and (reference_ratio).abs > threshold
         reference_ratio_z = z_score(reference_ratio, referenced_sigma, referenced_mean)
         reference_ratio_z_normalize = feature_scale_normalize(reference_ratio_z, maximum_reference_z_score, minimum_reference_z_score)
       end
 
       download_ratio_z_normalize = 0
-      if download_ratio and download_ratio != 0
+      if download_ratio and (download_ratio).abs > threshold
         download_ratio_z = z_score(download_ratio, download_sigma, download_mean)
         download_ratio_z_normalize = feature_scale_normalize(download_ratio_z, maximum_download_z_score, minimum_download_z_score)
       end
