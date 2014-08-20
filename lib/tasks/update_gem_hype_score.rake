@@ -60,13 +60,13 @@ namespace :db do
       puts reference_ratio
       threshold = 0.000001
 
-      reference_ratio_z_normalize = 0
+      reference_ratio_z_normalize = 0.0
       if reference_ratio and (reference_ratio).abs > threshold and reference_ratio.finite?
         reference_ratio_z = z_score(reference_ratio, referenced_sigma, referenced_mean)
         reference_ratio_z_normalize = feature_scale_normalize(reference_ratio_z, maximum_reference_z_score, minimum_reference_z_score)
       end
 
-      download_ratio_z_normalize = 0
+      download_ratio_z_normalize = 0.0
       if download_ratio and (download_ratio).abs > threshold and download_ratio.finite?
         download_ratio_z = z_score(download_ratio, download_sigma, download_mean)
         download_ratio_z_normalize = feature_scale_normalize(download_ratio_z, maximum_download_z_score, minimum_download_z_score)
@@ -75,11 +75,11 @@ namespace :db do
       puts "ref: " + reference_ratio_z_normalize.to_s +  " down: " + download_ratio_z_normalize.to_s
       puts "sigma:" + referenced_sigma.to_s
 
-      if download_ratio_z_normalize.nan?
+      if download_ratio_z_normalize.equal?(nan)
         download_ratio_z_normalize = 0
       end
 
-      if reference_ratio_z_normalize.nan?
+      if reference_ratio_z_normalize.equal?(nan)
         reference_ratio_z_normalize = 0
       end
 
