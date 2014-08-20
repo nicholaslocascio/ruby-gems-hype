@@ -56,7 +56,7 @@ namespace :db do
       reference_ratio = repo.star_to_reference_ratio
       download_ratio = repo.star_to_download_ratio
 
-      if reference_ratio.nil? or download_ratio.nil?
+      if reference_ratio.nil? or download_ratio.nil? or !reference_ratio.finite? or !download_ratio.finite?
         next
       end
 
