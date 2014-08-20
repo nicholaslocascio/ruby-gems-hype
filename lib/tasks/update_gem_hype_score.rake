@@ -20,14 +20,14 @@ namespace :db do
 
     Repo.find_each do |repo|
       star_ratio = repo.star_to_reference_ratio
-      if star_ratio != nil and star_ratio > 0
+      if star_ratio != nil and star_ratio > 0 and star_ratio.finite?
         referenced_variance_sum += variance(star_ratio,referenced_mean)
         puts referenced_variance_sum
         referenced_variance_count += 1
       end
 
       download_ratio = repo.star_to_download_ratio
-      if download_ratio != nil and download_ratio > 0
+      if download_ratio != nil and download_ratio > 0 and download_ratio.finite?
         download_variance_sum += variance(download_ratio,download_mean)
         download_variance_count += 1
       end
