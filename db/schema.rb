@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140819072059) do
+ActiveRecord::Schema.define(version: 20140820053624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20140819072059) do
     t.datetime "repo_created_at"
     t.integer  "forks_count"
     t.integer  "download_count"
+    t.float    "star_to_reference_ratio"
+    t.float    "star_to_download_ratio"
   end
 
   add_index "repos", ["name"], name: "index_repos_on_name", unique: true, using: :btree
