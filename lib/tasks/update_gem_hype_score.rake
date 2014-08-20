@@ -22,6 +22,7 @@ namespace :db do
       star_ratio = repo.star_to_reference_ratio
       if star_ratio != nil and star_ratio > 0 and star_ratio.finite?
         referenced_variance_sum += variance(star_ratio,referenced_mean)
+        puts repo.name
         puts referenced_variance_sum
         referenced_variance_count += 1
       end
