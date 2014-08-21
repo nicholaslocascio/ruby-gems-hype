@@ -73,15 +73,10 @@ namespace :db do
       end
 
       puts "ref: " + reference_ratio_z_normalize.to_s +  " down: " + download_ratio_z_normalize.to_s
-      puts "sigma:" + referenced_sigma.to_s
+      puts "sigma: " + referenced_sigma.to_s
 
-      if !download_ratio_z_normalize
-        download_ratio_z_normalize = 0
-      end
-
-      if !reference_ratio_z_normalize
-        reference_ratio_z_normalize = 0
-      end
+      download_ratio_z_normalize = zero_if_nan_else_input(download_ratio_z_normalize)
+      reference_ratio_z_normalize = zero_if_nan_else_input(reference_ratio_z_normalize)
 
       repo.hype_score = 200*[reference_ratio_z_normalize,download_ratio_z_normalize].max - 100
       puts "Repo: " + repo.name +  "hype score:" + repo.hype_score.to_s
@@ -108,4 +103,8 @@ end
 
 def variance(x,mean)
   return (x-mean)**2
+end
+
+def zero_if_nan_else_input(x)
+  return (x.is_a?(Float) && x.nan?) ? 0 : x
 end
